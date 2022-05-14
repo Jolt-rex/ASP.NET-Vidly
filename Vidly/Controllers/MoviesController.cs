@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -9,9 +10,20 @@ namespace Vidly.Controllers
         public IActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek!" };
+            var customers = new List<Customer>
+            {
+                new Customer { Name = "Hannah" },
+                new Customer { Name = "Kevin" }
+            };
 
-            // return View(movie);
-            return Content("Hello World");
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+
+            return View(viewModel);
         }
 
         [Route("movies/released/{year:range(1980, 2022)}/{month:range(1, 12)}")]
